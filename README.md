@@ -1,3 +1,4 @@
+
 # EventFeedback System
 
 A Flask-based web application for collecting and managing event feedback at Universal Engineering College.
@@ -63,6 +64,17 @@ eventfeedback/
 └── feedback.db        # SQLite database (created on first run)
 ```
 
+
+
+---
+
+## ⚙️ Setup Instructions
+
+1. Clone the repository:
+```bash
+git clone https://github.com/AjnaAshraf/Event_feedback_portal.git
+cd Event_feedback_portal
+
 ## Security Notes
 
 - Change the `secret_key` in `app.py` before deployment
@@ -73,3 +85,24 @@ eventfeedback/
 ## License
 
 MIT License 
+
+# Event_feedback_portal
+Developed a Full Stack Event Feedback Portal using HTML, CSS, JavaScript, and Python. Admin can create and manage past, ongoing, and upcoming events. Students and faculty submit feedback for closed events, which the admin can view and analyze in real time.
+
+
+---
+
+## ✅ What to do now (VERY IMPORTANT)
+
+1. **Replace your README.md content completely** with the above
+2. Make sure there are **NO lines like**:
+3. Save the file
+
+---
+
+## ✅ Finish Git process
+Run:
+```bash
+git add README.md
+git commit -m "Update README.md"
+git push -u origin main
