@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Event</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .form-container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .form-title {
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <h2 class="form-title text-center">Edit Event</h2>
+        <form method="POST" action="{{ url_for('update_event', event_id=event.id) }}" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="name" class="form-label">Event Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ event.name }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <input type="text" class="form-control" id="category" name="category" value="{{ event.category }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" class="form-control" id="location" name="location" value="{{ event.location }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="start_date" class="form-label">Start Date</label>
+                <input type="date" class="form-control" id="start_date" name="start_date" value="{{ event.start_date }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="end_date" class="form-label">End Date</label>
+                <input type="date" class="form-control" id="end_date" name="end_date" value="{{ event.end_date }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Event Image (optional)</label>
+                <input class="form-control" type="file" id="image" name="image">
+                {% if event.image_url %}
+                    <small class="form-text text-muted">Current Image: <a href="{{ event.image_url }}" target="_blank">View</a></small>
+                {% endif %}
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success px-4">Update Event</button>
+                <a href="{{ url_for('eventlist') }}" class="btn btn-secondary ms-2">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

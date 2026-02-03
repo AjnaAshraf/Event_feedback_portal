@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="admin-dashboard">
+    <div class="admin-header">
+        <div class="header-content">
+            <a href="{{ url_for('admin_dashboard') }}" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Events
+            </a>
+            <h2>Feedback for {{ event_name }}</h2>
+        </div>
+        <a href="{{ url_for('logout') }}" class="btn btn-secondary">Logout</a>
+    </div>
+
+    <div class="event-summary">
+        <div class="summary-stats">
+            <div class="stat-card">
+                <span class="stat-label">Total Feedback</span>
+                <span class="stat-value">{{ feedbacks|length }}</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Average Rating</span>
+                <span class="stat-value">
+                    {% for i in range(avg_rating|int) %}★{% endfor %}
+                    {% if avg_rating % 1 >= 0.5 %}½{% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="feedback-list">
+        {% for feedback in feedbacks %}
+        <div class="feedback-card">
+            <div class="feedback-header">
+                <div class="user-info">
+                    <div class="user-name">{{ feedback.name }}</div>
+                    <div class="user-meta">
+                        {{ feedback.department }} • 
+                        {% if feedback.role == 'student' %}
+                            Student ({{ feedback.year }})
+                        {% else %}
+                            Faculty ({{ feedback.designation }})
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="feedback-meta">
+                    <div class="rating">
+                        {% for i in range(feedback.rating) %}★{% endfor %}
+                    </div>
+                    <div class="timestamp">{{ feedback.submitted_at }}</div>
+                </div>
+            </div>
+            <div class="feedback-content">
+                <p class="comment">{{ feedback.comments }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .feedback-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .feedback-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .user-info {
+        margin-bottom: 10px;
+    }
+    
+    .user-name {
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: #333;
+    }
+    
+    .user-meta {
+        color: #666;
+        font-size: 0.9rem;
+    }
+    
+    .feedback-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    
+    .rating {
+        color: #FFD700;
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    
+    .timestamp {
+        color: #777;
+        font-size: 0.9rem;
+    }
+    
+    .feedback-content {
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+    
+    .comment {
+        line-height: 1.6;
+        color: #444;
+    }
+    
+    @media (max-width: 768px) {
+        .feedback-header {
+            flex-direction: column;
+        }
+        
+        .feedback-meta {
+            flex-direction: row;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .rating {
+            margin-right: 10px;
+            margin-bottom: 0;
+        }
+    }
+</style>
+{% endblock %}
